@@ -1,0 +1,4 @@
+naveendkdb
+Naveendkdb123
+
+mongodb+srv://naveendkdb:<password>@cluster0.iwwjd.mongodb.net/<dbname>?retryWrites=true&w=majority
