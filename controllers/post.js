@@ -1,11 +1,23 @@
 
+const Post = require('../models/post')
 
 exports.getPosts = (req,res)=>{
-    res.json({
-        posts:[
-            {title:'FIrst post'},
-            {title:'"Second post'}
-        ]
-    })
+   const posts = Post.find().select("_id title body")
+   .then((posts)=>{
+       res.status.json({posts:posts})
+   })
+   .catch(err => console.log(err));
+
+}
+
+exports.createPost = (req,res) =>{
+   const post = new Post(req.body)
+  // console.log("Creating Post", req.body) 
+
+  post.save().then(result=>{
+      res.status(200).json({
+          post:result
+      })
+  })
 
 }

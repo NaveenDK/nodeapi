@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const morgan = require("morgan");
+const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 // import mongoose
 const mongoose = require('mongoose');
 // load env variables
@@ -8,6 +10,7 @@ const dotenv = require('dotenv');
 
 //bring in routes
 const postRoutes = require('./routes/post');
+const authRoutes = require('./routes/auth');
 
 const myOwnMiddleware = (req,res,next)=>{
     console.log("middleware applied!!!");
@@ -16,9 +19,12 @@ const myOwnMiddleware = (req,res,next)=>{
 
 //middleware
 app.use(morgan("dev"));
+app.use(bodyParser.json());
 app.use(myOwnMiddleware)
+app.use(expressValidator());
 
 app.use("/",postRoutes);
+app.use("/",authRoutes);        
 
 const port = 8080;
 
