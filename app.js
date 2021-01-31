@@ -2,9 +2,11 @@ const express = require('express');
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 // import mongoose
 const mongoose = require('mongoose');
+
 // load env variables
 const dotenv = require('dotenv');
 
@@ -20,6 +22,7 @@ const myOwnMiddleware = (req,res,next)=>{
 //middleware
 app.use(morgan("dev"));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(myOwnMiddleware)
 app.use(expressValidator());
 
