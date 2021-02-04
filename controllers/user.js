@@ -1,7 +1,7 @@
 const User = require("../models/user");
 
 exports.userById= (req,res,next, id)=>{
-    User.findbyId(id).exec((err, user)=>{
+    User.findById(id).exec((err, user)=>{
         if( err || !user){
             return res.status(400).json({
                     error:"User not found"
@@ -9,7 +9,7 @@ exports.userById= (req,res,next, id)=>{
         }
 
         req.profile = user//adds 
-        next()
+        next();
 
     })
 }
@@ -36,4 +36,9 @@ exports.allUsers= (req,res)=>{
         res.json({ users: users})
 
     }).select("name email updated created")
+}
+
+
+exports.getUser = (req,res) =>{
+    return res.json(req.profile); 
 }
