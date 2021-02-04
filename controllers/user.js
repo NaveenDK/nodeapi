@@ -1,4 +1,6 @@
+const _ = require('lodash');
 const User = require("../models/user");
+
 
 exports.userById= (req,res,next, id)=>{
     User.findById(id).exec((err, user)=>{
@@ -40,5 +42,10 @@ exports.allUsers= (req,res)=>{
 
 
 exports.getUser = (req,res) =>{
+    req.profile.hashed_password= undefined;
+    req.profile.salt = undefined;
+
+
     return res.json(req.profile); 
 }
+
