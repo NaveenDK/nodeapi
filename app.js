@@ -13,6 +13,7 @@ const dotenv = require('dotenv');
 //bring in routes
 const postRoutes = require('./routes/post');
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 const myOwnMiddleware = (req,res,next)=>{
     console.log("middleware applied!!!");
@@ -27,7 +28,8 @@ app.use(myOwnMiddleware)
 app.use(expressValidator());
 
 app.use("/",postRoutes);
-app.use("/",authRoutes);        
+app.use("/",authRoutes);
+app.use("/",userRoutes);        
 
 const port = 8080;
 
