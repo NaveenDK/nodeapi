@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const fs = require('fs');
 // import mongoose
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 // load env variables
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(myOwnMiddleware)
 app.use(expressValidator());
+app.use( cors())
 
 app.use("/",postRoutes);
 app.use("/",authRoutes);
@@ -54,7 +56,11 @@ app.get('/',(req,res)=>{
   })
 
 })
+
+
 dotenv.config()
+
+
  
 //db connection
 mongoose.connect(
