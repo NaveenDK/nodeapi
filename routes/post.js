@@ -1,7 +1,7 @@
 
 const express = require('express');
 const {requireSignin} = require('../controllers/auth');
-const {getPosts,createPost,postsByUser, isPoster, deletePost,postById } = require('../controllers/post');
+const {getPosts,createPost,postsByUser, isPoster, deletePost,postById,updatePost } = require('../controllers/post');
 const {userById} = require("../controllers/user");
 //const {}
 
@@ -11,7 +11,7 @@ const {createPostValidator} = require('../validator');
 
 const router = express.Router();
 
-router.get('/', requireSignin,getPosts);
+router.get('/posts', requireSignin,getPosts);
 router.post( 
     "/post/new/:userId",
     requireSignin,
@@ -20,6 +20,11 @@ router.post(
 );
 
 router.get("/posts/by/:userId", requireSignin, postsByUser );
+
+router.put(
+    '/post/:postId', requireSignin, isPoster, updatePost
+)
+
 
 router.delete(
     '/post/:postId', requireSignin, isPoster, deletePost

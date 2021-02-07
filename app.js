@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
+const fs = require('fs');
 // import mongoose
 const mongoose = require('mongoose');
 
@@ -37,7 +38,22 @@ app.listen(port,()=>{
     console.log(`A nodejs api is listening on port:${port}`)
 });
 
+app.get('/',(req,res)=>{
+  fs.readFile('docs/apiDocs.json',(err,data)=>{
+    if(err){
+      res.status(400).json({
+        error:err
+      })
+    }
 
+    const docs = JSON.parse(data);
+    res.json(docs);
+
+
+
+  })
+
+})
 dotenv.config()
  
 //db connection
