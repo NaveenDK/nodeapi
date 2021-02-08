@@ -30,9 +30,9 @@ app.use(myOwnMiddleware)
 app.use(expressValidator());
 app.use( cors())
 
-app.use("/",postRoutes);
-app.use("/",authRoutes);
-app.use("/",userRoutes);        
+app.use("/api",postRoutes);
+app.use("/api",authRoutes);
+app.use("/api",userRoutes);        
 
 const port = 8080;
 
@@ -40,7 +40,7 @@ app.listen(port,()=>{
     console.log(`A nodejs api is listening on port:${port}`)
 });
 
-app.get('/',(req,res)=>{
+app.get('/api',(req,res)=>{
   fs.readFile('docs/apiDocs.json',(err,data)=>{
     if(err){
       res.status(400).json({
