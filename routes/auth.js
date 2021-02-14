@@ -12,6 +12,7 @@ const router = express.Router();
 //router.get('/', getPosts);
 router.post("/signup",userSignupValidator, signup);
 
+
 router.post("/signin", signin);
 
 
