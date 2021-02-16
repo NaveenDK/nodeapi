@@ -22,3 +22,8 @@ router.get("/signout", signout)
 
 
 module.exports = router;
+
+//sudo git clone https://github.com/cornflourblue/node-mongo-registration-login-api /opt/back-end
+//https://github.com/NaveenDK/nodeapi.git
+
+//sudo git clone https://github.com/NaveenDK/nodeapi.git /opt/back-end

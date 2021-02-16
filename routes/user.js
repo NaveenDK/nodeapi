@@ -10,10 +10,10 @@ const {requireSignin} = require('../controllers/auth');
 const router = express.Router();
 
 //router.get('/', getPosts);
-router.get("/users",allUsers);
-router.get("/user/:userId", requireSignin, getUser);
-router.put("/user/:userId", requireSignin, updateUser);
-router.delete("/user/:userId", requireSignin, deleteUser);
+router.get("/api/users",allUsers);
+router.get("/api/user/:userId", requireSignin, getUser);
+router.put("/api/user/:userId", requireSignin, updateUser);
+router.delete("/api/user/:userId", requireSignin, deleteUser);
 
 //router.get("/signout", signout)
 
