@@ -10,7 +10,9 @@ exports.userById= (req,res,next, id)=>{
             })
         }
 
-        req.profile = user//adds 
+        req.profile = user;//adds 
+      //  console.log(req);
+        console.log(req.profile);
         next();
 
     })
@@ -24,7 +26,7 @@ exports.hasAuthorization= (req,res,next)=>{
             error:"User is not authorized to perform this action"
         })
     }
-
+  next();
 }
 
 exports.allUsers= (req,res)=>{

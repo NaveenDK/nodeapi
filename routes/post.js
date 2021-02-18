@@ -13,13 +13,13 @@ const router = express.Router();
 
 router.get('/posts', getPosts);
 router.post( 
-    "/post/new/:userId",
+    "/post/new/:user_Id",
     requireSignin,
     createPost,
     createPostValidator,
 );
 
-router.get("/posts/by/:userId", requireSignin, postsByUser );
+router.get("/posts/by/:user_Id", requireSignin, postsByUser );
 
 router.put(
     '/post/:postId', requireSignin, isPoster, updatePost
@@ -29,8 +29,8 @@ router.put(
 router.delete(
     '/post/:postId', requireSignin, isPoster, deletePost
 )
-///any route containing : userID our app will execute userById()
-router.param("userId", userById);
+///any route containing : user_Id our app will execute userById()
+router.param("user_Id", userById);
 
 router.param("postId",postById);
 

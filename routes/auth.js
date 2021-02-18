@@ -19,7 +19,7 @@ router.post("/signin", signin);
 router.get("/signout", signout)
 
 
-
+router.param("user_Id", userById)
 
 module.exports = router;
 
