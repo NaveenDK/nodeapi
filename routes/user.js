@@ -1,7 +1,7 @@
 
 const express = require('express');
 
-const {userById ,allUsers, getUser,updateUser,deleteUser } = require('../controllers/user');
+const {userById ,allUsers, getUser,updateUser,deleteUser ,userPhoto} = require('../controllers/user');
 const {requireSignin} = require('../controllers/auth');
 
 
@@ -16,6 +16,8 @@ router.put("/user/:user_Id", requireSignin, updateUser);
 router.delete("/user/:user_Id", requireSignin, deleteUser);
 
 //router.get("/signout", signout)
+
+router.get("/user/photo/:user_Id",userPhoto )
 
 router.param("user_Id",userById);
 
