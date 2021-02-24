@@ -1,13 +1,26 @@
 
 const express = require('express');
 
-const {userById ,allUsers, getUser,updateUser,deleteUser ,userPhoto} = require('../controllers/user');
+const {userById ,allUsers, getUser,updateUser,deleteUser 
+    
+    ,userPhoto
+, addFollowing,
+addFollower, removeFollowing, removeFollower
+
+
+}
+
+= require('../controllers/user');
 const {requireSignin} = require('../controllers/auth');
 
 
 //exports.getPosts
 
 const router = express.Router();
+
+router.put('/user/follow', requireSignin, addFollowing,addFollower );
+router.put('/user/unfollow', requireSignin, removeFollowing, removeFollower);
+
 
 //router.get('/', getPosts);
 router.get("/users",allUsers);

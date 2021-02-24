@@ -5,7 +5,11 @@ const User = require("../models/user");
 
 
 exports.userById= (req,res,next, id)=>{
-    User.findById(id).exec((err, user)=>{
+    User.findById(id)
+    //populate followers and following users array
+    .populate('following', '_id name')
+    .populate('followers', '_id name')
+    .exec((err, user)=>{
         if( err || !user){
             return res.status(400).json({
                     error:"User not found"
@@ -141,5 +145,85 @@ exports.deleteUser = (req,res,next)=>{
 }
 
 
+//follow unfollow
+
+exports.addFollowing = (req,res,next)=>{
+    User.findByIdAndUpdate(re.body.userId, {
+        $push:{following: req.body.followId}
+    },
+    (err,result)=>{
+        if(err){
+            return res.status(400).json({error:err})
+        }
+        next();
+    }
+
+    )
+}
 
 
+
+exports.addFollower= (req,res )=>{
+    User.findByIdAndUpdate(re.body.followId, {
+        $push:{followers: req.body.userId}
+    },
+             {new : true}
+    )
+    .populate('following', '_id name')
+    .populate('followers', '_id name')
+    .exec((err,result)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            })
+        }
+        result.hashed_password= undefined
+        result.salt = undefined;
+        res.json(result)
+
+
+    })
+
+}
+//Remove following
+
+exports.removeFollowing = (req,res,next)=>{
+    User.findByIdAndUpdate(re.body.userId, {
+        $pull:{following: req.body.unfollowId}
+    },
+    (err,result)=>{
+        if(err){
+            return res.status(400).json({error:err})
+        }
+        next();
+    }
+
+    )
+}
+
+
+//remove follower
+
+exports.removeFollower= (req,res )=>{
+    User.findByIdAndUpdate(re.body.unfollowId, {
+        $pull:{followers: req.body.userId}
+        //{new:true}
+    },
+             {new : true}
+    )
+    .populate('following', '_id name')
+    .populate('followers', '_id name')
+    .exec((err,result)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            })
+        }
+        result.hashed_password= undefined
+        result.salt = undefined;
+        res.json(result)
+        
+
+    })
+
+}
