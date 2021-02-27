@@ -148,7 +148,7 @@ exports.deleteUser = (req,res,next)=>{
 //follow unfollow
 
 exports.addFollowing = (req,res,next)=>{
-    User.findByIdAndUpdate(re.body.userId, {
+    User.findByIdAndUpdate(req.body.userId, {
         $push:{following: req.body.followId}
     },
     (err,result)=>{
@@ -164,8 +164,8 @@ exports.addFollowing = (req,res,next)=>{
 
 
 exports.addFollower= (req,res )=>{
-    User.findByIdAndUpdate(re.body.followId, {
-        $push:{followers: req.body.userId}
+    User.findByIdAndUpdate(req.body.followId, {
+        $push:{followers: req.body.user_Id}
     },
              {new : true}
     )
@@ -177,7 +177,7 @@ exports.addFollower= (req,res )=>{
                 error:err
             })
         }
-        result.hashed_password= undefined
+        result.hashed_password= undefined;
         result.salt = undefined;
         res.json(result)
 
@@ -188,7 +188,7 @@ exports.addFollower= (req,res )=>{
 //Remove following
 
 exports.removeFollowing = (req,res,next)=>{
-    User.findByIdAndUpdate(re.body.userId, {
+    User.findByIdAndUpdate(req.body.userId, {
         $pull:{following: req.body.unfollowId}
     },
     (err,result)=>{
@@ -205,7 +205,7 @@ exports.removeFollowing = (req,res,next)=>{
 //remove follower
 
 exports.removeFollower= (req,res )=>{
-    User.findByIdAndUpdate(re.body.unfollowId, {
+    User.findByIdAndUpdate(req.body.unfollowId, {
         $pull:{followers: req.body.userId}
         //{new:true}
     },
