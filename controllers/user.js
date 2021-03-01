@@ -163,29 +163,50 @@ exports.addFollowing = (req,res,next)=>{
 
 
 
-exports.addFollower= (req,res )=>{
-    User.findByIdAndUpdate(req.body.followId, {
-        $push:{followers: req.body.user_Id}
-    },
-             {new : true}
-    )
-    .populate('following', '_id name')
-    .populate('followers', '_id name')
-    .exec((err,result)=>{
-        if(err){
-            return res.status(400).json({
-                error:err
-            })
-        }
-        result.hashed_password= undefined;
-        result.salt = undefined;
-        res.json(result)
+// exports.addFollower= (req,res )=>{
+//     User.findByIdAndUpdate(req.body.followId, {
+//         $push:{followers: req.body.user_Id}
+//     },
+//              {new : true}
+//     )
+//     .populate('following', '_id name')
+//     .populate('followers', '_id name')
+//     .exec((err,result)=>{
+//         if(err){
+//             return res.status(400).json({
+//                 error:"This is an error "
+//             })
+//         }
+//         result.hashed_password= undefined;
+//         result.salt = undefined;
+//         res.json(result)
 
 
-    })
+//     })
 
-}
+// }
 //Remove following
+
+exports.addFollower = (req, res) => {
+    User.findByIdAndUpdate(req.body.follow_Id, { $push: { followers: req.body.user_Id } }, { new: true })
+        .populate('following', '_id name')
+        .populate('followers', '_id name')
+        .exec((err, result) => {
+            if (err) {
+                return res.status(400).json({
+                    error: err
+                });
+            }
+            result.hashed_password = undefined;
+            result.salt = undefined;
+            res.json(result);
+        });
+};
+
+
+
+
+
 
 exports.removeFollowing = (req,res,next)=>{
     User.findByIdAndUpdate(req.body.userId, {
