@@ -148,8 +148,8 @@ exports.deleteUser = (req,res,next)=>{
 //follow unfollow
 
 exports.addFollowing = (req,res,next)=>{
-    User.findByIdAndUpdate(req.body.userId, {
-        $push:{following: req.body.followId}
+    User.findByIdAndUpdate(req.body.user_Id, {
+        $push:{following: req.body.follow_Id}
     },
     (err,result)=>{
         if(err){
@@ -229,8 +229,8 @@ exports.removeFollowing = (req,res,next)=>{
 //remove follower
 
 exports.removeFollower= (req,res )=>{
-    User.findByIdAndUpdate(req.body.unfollowId, {
-        $pull:{followers: req.body.userId}
+    User.findByIdAndUpdate(req.body.unfollow_Id, {
+        $pull:{followers: req.body.user_Id}
         //{new:true}
     },
              {new : true}
