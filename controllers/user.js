@@ -192,6 +192,9 @@ exports.addFollower = (req, res) => {
         .populate('following', '_id name')
         .populate('followers', '_id name')
         .exec((err, result) => {
+            console.log("result " , result);
+            console.log(" req.params.follow_id " , req.params.follow_Id);
+            console.log(" req.body.user_Id " , req.body.user_Id);
             if (err) {
                 return res.status(400).json({
                     error: err
